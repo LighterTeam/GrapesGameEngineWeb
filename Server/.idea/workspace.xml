@@ -71,7 +71,7 @@
       <file leaf-file-name="main.go" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GameServer/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="472" selection-end="472" vertical-scroll-proportion="0.69040245">
+            <state line="27" column="54" selection-start="466" selection-end="466" vertical-scroll-proportion="0.6130031">
               <folding />
             </state>
           </provider>
@@ -468,7 +468,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GameServer/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="472" selection-end="472" vertical-scroll-proportion="0.69040245">
+        <state line="27" column="54" selection-start="466" selection-end="466" vertical-scroll-proportion="0.6130031">
           <folding />
         </state>
       </provider>
