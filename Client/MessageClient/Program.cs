@@ -23,8 +23,13 @@ namespace MessageClient
                     string mess = Console.ReadLine();
                     if (mess.Length == 0)
                         continue;
+
+                    Console.WriteLine("Send:" + mess);
                     byte[] messdata = Buffers.GetSocketBytes(mess);
                     messdata = Buffers.MergeBytes(Buffers.GetSocketBytes(messdata.Length), messdata);
+                    client.SendData(messdata);
+                    client.SendData(messdata);
+                    client.SendData(messdata);
                     client.SendData(messdata);
                 }
             }
@@ -36,7 +41,8 @@ namespace MessageClient
 
         static void ClientBinaryInputHandler(byte[] data)
         {
-            Console.WriteLine(Encoding.UTF8.GetString(data, 0, data.Length));
+            var csData = Encoding.UTF8.GetString(data, 0, data.Length);
+            Console.WriteLine("Recv:" + csData);
         }
 
         static void ClientMessageInputHandler(string message)
