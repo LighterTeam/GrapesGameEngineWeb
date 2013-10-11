@@ -5,11 +5,6 @@ import (
 	"encoding/binary"
 	"fmt"
 	"net"
-//	"TSUtil"
-//	"strings"
-//	"strconv"
-
-	"TSLog"
 )
 
 type ConnectNew func (conn net.Conn) uint64
@@ -39,7 +34,6 @@ func (this *TSTCP) SendBuffer(sBuffer []byte) {
 func (this *TSTCP) Create_Server(webpath string, init ServerInit, funCN ConnectNew, funRB ReceiveBuffer, funCC ConnectClose) {
 	listener, err := net.Listen("tcp", webpath)
 	if err != nil {
-		TSLog.Fatal("Tcp listen at port 9188 failed, err: %v", err.Error())
 		return
 	}
 
@@ -48,10 +42,8 @@ func (this *TSTCP) Create_Server(webpath string, init ServerInit, funCN ConnectN
 	for {
 		this.conn, err = listener.Accept()
 		if err != nil {
-			TSLog.Error("Accept failed, err: %v", err.Error())
 			return
 		}
-		TSLog.Info("Accept connect.")
 
 		UUID := funCN(this.conn)
 //		this.SendBuffer([]byte("_RegistUUID," + TSUtil.ToString(int(UUID))))
@@ -64,7 +56,6 @@ func (this *TSTCP) Create_Client(webpath string, init ClientInit, funRB ReceiveB
 	conn, err := net.Dial("tcp", webpath)
 	this.conn = conn
 	if err != nil {
-		TSLog.Error("没有服务器连接: %v", webpath)
 		return
 	}
 

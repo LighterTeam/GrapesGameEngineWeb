@@ -37,7 +37,7 @@ namespace MessageClient {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("888")]
+        [global::System.Configuration.DefaultSettingValueAttribute("9901")]
         public int Port {
             get {
                 return ((int)(this["Port"]));
