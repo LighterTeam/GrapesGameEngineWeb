@@ -28,9 +28,6 @@ namespace MessageClient
                     byte[] messdata = Buffers.GetSocketBytes(mess);
                     messdata = Buffers.MergeBytes(Buffers.GetSocketBytes(messdata.Length), messdata);
                     client.SendData(messdata);
-                    client.SendData(messdata);
-                    client.SendData(messdata);
-                    client.SendData(messdata);
                 }
             }
             else

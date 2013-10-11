@@ -21,7 +21,7 @@ func main() {
 		func(conn net.Conn, sBuffer string, UUID uint64) {
 			fmt.Println("Recv:",sBuffer)
 
-			tcp.SendBuffer([]byte(sBuffer))
+			SendBuffer(conn, []byte(sBuffer))
 			fmt.Println("Send:",sBuffer)
 		},
 
