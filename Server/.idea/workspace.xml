@@ -4,7 +4,7 @@
     <list default="true" id="7b6031b4-978a-48c4-ab90-486ef5632f2c" name="Default" comment="" />
     <ignored path="Server.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/main.go" changelist="7b6031b4-978a-48c4-ab90-486ef5632f2c" time="1381476971703" ignored="false" />
+    <file path="/main.go" changelist="7b6031b4-978a-48c4-ab90-486ef5632f2c" time="1381477494171" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +71,7 @@
       <file leaf-file-name="main.go" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GameServer/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="54" selection-start="466" selection-end="466" vertical-scroll-proportion="0.6130031">
+            <state line="31" column="46" selection-start="577" selection-end="577" vertical-scroll-proportion="0.67966104">
               <folding />
             </state>
           </provider>
@@ -80,7 +80,7 @@
       <file leaf-file-name="TSTCP.go" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/Src/TSTCP/TSTCP.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="20" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0">
+            <state line="5" column="6" selection-start="55" selection-end="55" vertical-scroll-proportion="-5.0">
               <folding />
             </state>
           </provider>
@@ -233,7 +233,7 @@
     <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="FullScreen" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -367,7 +367,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2515244" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -461,14 +461,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Common/Src/TSTCP/TSTCP.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="20" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0">
+        <state line="5" column="6" selection-start="55" selection-end="55" vertical-scroll-proportion="-5.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GameServer/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="466" selection-end="466" vertical-scroll-proportion="0.6130031">
+        <state line="31" column="46" selection-start="577" selection-end="577" vertical-scroll-proportion="0.67966104">
           <folding />
         </state>
       </provider>

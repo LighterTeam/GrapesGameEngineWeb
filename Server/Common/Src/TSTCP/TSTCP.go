@@ -3,7 +3,7 @@ package TSTCP
 import (
 	"bytes"
 	"encoding/binary"
-	"fmt"
+	//"fmt"
 	"net"
 )
 
@@ -75,7 +75,7 @@ func tcpHandler(conn net.Conn, funRB ReceiveBuffer, funCC ConnectClose, UUID uin
 		size, err := conn.Read(cache)
 		if err != nil {
 			funCC(conn, UUID)
-			fmt.Printf("Read error, %v\n", err.Error())
+			//fmt.Printf("Read error, %v\n", err.Error())
 			return
 		}
 
