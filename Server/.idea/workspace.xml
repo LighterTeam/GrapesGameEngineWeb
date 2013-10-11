@@ -4,7 +4,7 @@
     <list default="true" id="7b6031b4-978a-48c4-ab90-486ef5632f2c" name="Default" comment="" />
     <ignored path="Server.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/main.go" changelist="7b6031b4-978a-48c4-ab90-486ef5632f2c" time="1381475115093" ignored="false" />
+    <file path="/main.go" changelist="7b6031b4-978a-48c4-ab90-486ef5632f2c" time="1381476971703" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +71,16 @@
       <file leaf-file-name="main.go" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GameServer/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="40" selection-start="154" selection-end="154" vertical-scroll-proportion="0.47393364">
+            <state line="29" column="0" selection-start="472" selection-end="472" vertical-scroll-proportion="0.69040245">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TSTCP.go" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/Src/TSTCP/TSTCP.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="20" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -452,14 +461,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Common/Src/TSTCP/TSTCP.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="295" selection-end="295" vertical-scroll-proportion="-0.6982622">
+        <state line="20" column="20" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GameServer/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="40" selection-start="154" selection-end="154" vertical-scroll-proportion="0.47393364">
+        <state line="29" column="0" selection-start="472" selection-end="472" vertical-scroll-proportion="0.69040245">
           <folding />
         </state>
       </provider>

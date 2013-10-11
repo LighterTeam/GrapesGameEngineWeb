@@ -6,6 +6,8 @@ import (
 	. "TSTCP"
 )
 
+var AddUUID uint64
+
 func main() {
 	tcp := new(TSTCP)
 	tcp.Create_Server(":9901",
@@ -15,18 +17,19 @@ func main() {
 
 		func(conn net.Conn) uint64 {
 			fmt.Println("Success!")
-			return 0
+			AddUUID++
+			return AddUUID
 		},
 
 		func(conn net.Conn, sBuffer string, UUID uint64) {
-			fmt.Println("Recv:",sBuffer)
+			fmt.Println("UUID:",UUID," Recv:",sBuffer)
 
 			SendBuffer(conn, []byte(sBuffer))
-			fmt.Println("Send:",sBuffer)
+			fmt.Println("UUID:",UUID," Send:",sBuffer)
 		},
 
 		func(conn net.Conn, UUID uint64) {
-			fmt.Println("DB客户端下线, UUID: %v", UUID)
+			fmt.Println("DB客户端下线, UUID: ", UUID)
 		},
 	)
 }
