@@ -22,11 +22,21 @@ func RegistClient(uuid uint64, conn net.Conn){
 	G_GameMutex.Lock()
 	G_PoolClient[uuid] = &Client{uuid, Sprite{0,0,0}, conn}
 	packet := ""
+
+	// 给自己注册
+	packet = fmt.Sprintf(`{"UUID":%v,"OPCODE":0}`,uuid)
+	SendBuffer(conn,[]byte(packet))
+
+	// 给新开启的玩家 创建其他玩家
 	for _,v := range(G_PoolClient) {
-		packet = fmt.Sprintf(`{"UUID":%v,"OPCODE":0}`,v.Uuid)
+		if v.Uuid == uuid {
+			continue
+		}
+		packet = fmt.Sprintf(`{"UUID":%v,"OPCODE":1}`,v.Uuid)
 		SendBuffer(conn,[]byte(packet))
 	}
 
+	// 其他玩家 创建新上线的玩家
 	packet = fmt.Sprintf(`{"UUID":%v,"OPCODE":1}`,uuid)
 	for _,v := range(G_PoolClient) {
 		if v.Uuid != uuid {
@@ -39,6 +49,10 @@ func RegistClient(uuid uint64, conn net.Conn){
 func UnregistClient(uuid uint64){
 	G_GameMutex.Lock()
 	delete(G_PoolClient, uuid)
+	packet := fmt.Sprintf(`{"UUID":%v,"OPCODE":3}`,uuid)
+	for _,v := range(G_PoolClient) {
+		SendBuffer(v.Conn,[]byte(packet))
+	}
 	G_GameMutex.Unlock()
 }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LitJson;
+using System.Drawing;
 
 namespace GameClient
 {
@@ -81,13 +82,16 @@ namespace GameClient
                     {
                         var uuid = (Int64)jd["UUID"];
                         SelfUUID = uuid;
-                        CreateSprite(uuid);
+                        Point p = new Point(50,50);
+                        CreateSprite(uuid, p);
+                        fm.Text = "" + uuid;
                     }
                     break;
                 case (Int32)GameOpcode.CreateSprite:
                     {
                         var uuid = (Int64)jd["UUID"];
-                        CreateSprite(uuid);
+                        Point p = new Point(50, 50);
+                        CreateSprite(uuid, p);
                     }
                     break;
                 case (Int32)GameOpcode.MoveSprite:
@@ -98,13 +102,28 @@ namespace GameClient
                         GetSprite(uuid).SetLoc(x, y);
                     }
                     break;
+                case (Int32)GameOpcode.RemoveSprite:
+                    {
+                        var uuid = (Int64)jd["UUID"];
+                        RemoveSprite(uuid);
+                    }
+                    break;
             }
         }
+
+        public bool RemoveSprite(Int64 uuid)
+        {
+            var sp = SpriteList[uuid];
+            fm.Controls.Remove(sp);
+            fm.ResumeLayout(false);
+            SpriteList.Remove(uuid);
+            return true;
+        }
             
-        public Sprite CreateSprite(Int64 uuid)
+        public Sprite CreateSprite(Int64 uuid, Point p )
         {
             Sprite sp = new Sprite();
-            sp.Location = new System.Drawing.Point(208, 400);
+            sp.Location = p;
             sp.Name = ""+uuid;
             sp.Size = new System.Drawing.Size(75, 23);
             sp.TabIndex = 1;
@@ -113,6 +132,7 @@ namespace GameClient
             SpriteList[uuid] = sp;
 
             fm.Controls.Add(sp);
+            fm.ResumeLayout(false);
             return sp;
         }
 
