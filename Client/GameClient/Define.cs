@@ -32,5 +32,6 @@ namespace GameClient
         CreateSprite,
         MoveSprite,
         RemoveSprite,
+        RegistRootPlayer,
     }
 }

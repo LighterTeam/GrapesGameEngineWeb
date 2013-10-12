@@ -20,6 +20,7 @@ namespace GameClient
     {
         private Form fm;
         public Int64 SelfUUID;
+        public Int64 RootPlayerUUID;
 
         public TSGame(Form fm)
         {
@@ -81,10 +82,14 @@ namespace GameClient
                 case (Int32)GameOpcode.RegistServer:
                     {
                         var uuid = (Int64)jd["UUID"];
+                        var Ruuid = (Int64)jd["ROOTUUID"];
+
                         SelfUUID = uuid;
+                        RootPlayerUUID = Ruuid;
+
                         Point p = new Point(50,50);
                         CreateSprite(uuid, p);
-                        fm.Text = "" + uuid;
+                        fm.Text = "Self:" + SelfUUID + " RootID:" + RootPlayerUUID;
                     }
                     break;
                 case (Int32)GameOpcode.CreateSprite:
@@ -106,6 +111,13 @@ namespace GameClient
                     {
                         var uuid = (Int64)jd["UUID"];
                         RemoveSprite(uuid);
+                    }
+                    break;
+                case (Int32)GameOpcode.RegistRootPlayer:
+                    {
+                        var uuid = (Int64)jd["ROOTUUID"];
+                        RootPlayerUUID = uuid;
+                        fm.Text = "Self:" + SelfUUID + " RootID:" + RootPlayerUUID;
                     }
                     break;
             }

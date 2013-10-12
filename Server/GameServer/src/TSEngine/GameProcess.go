@@ -17,14 +17,18 @@ const (
 
 var G_PoolClient map[uint64]*Client = make(map[uint64]*Client)
 var G_GameMutex sync.Mutex
+var G_RootClient *Client
 
 func RegistClient(uuid uint64, conn net.Conn){
 	G_GameMutex.Lock()
 	G_PoolClient[uuid] = &Client{uuid, Sprite{0,0,0}, conn}
-	packet := ""
+
+	if G_RootClient == nil {
+		G_RootClient = G_PoolClient[uuid]
+	}
 
 	// 给自己注册
-	packet = fmt.Sprintf(`{"UUID":%v,"OPCODE":0}`,uuid)
+	packet := fmt.Sprintf(`{"UUID":%v,"ROOTUUID":%v,"OPCODE":0}`,uuid,G_RootClient.Uuid)
 	SendBuffer(conn,[]byte(packet))
 
 	// 给新开启的玩家 创建其他玩家
@@ -49,6 +53,20 @@ func RegistClient(uuid uint64, conn net.Conn){
 func UnregistClient(uuid uint64){
 	G_GameMutex.Lock()
 	delete(G_PoolClient, uuid)
+
+	if uuid == G_RootClient.Uuid {
+		G_RootClient = nil
+		for _,v := range(G_PoolClient) {
+			G_RootClient = v
+			break
+		}
+
+		for _,v := range(G_PoolClient) {
+			packet := fmt.Sprintf(`{"ROOTUUID":%v,"OPCODE":4}`,G_RootClient.Uuid)
+			SendBuffer(v.Conn,[]byte(packet))
+		}
+	}
+
 	packet := fmt.Sprintf(`{"UUID":%v,"OPCODE":3}`,uuid)
 	for _,v := range(G_PoolClient) {
 		SendBuffer(v.Conn,[]byte(packet))
