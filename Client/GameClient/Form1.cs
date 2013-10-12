@@ -16,9 +16,12 @@ namespace GameClient
     public partial class Form1 : Form
     {
         public static TSGame game;
+        public static Form1 GF;
 
         public Form1()
         {
+            GF = this;
+
             InitializeComponent();
 
             game = new TSGame(this);
@@ -31,11 +34,18 @@ namespace GameClient
             }
         }
 
+        public delegate void OutDelegate(string csData);
+        public void MessageProc(string csData)
+        {
+            game.MessageProc(csData);
+        }
+
         static void ClientBinaryInputHandler(byte[] data)
         {
             var csData = Encoding.UTF8.GetString(data, 0, data.Length);
             Console.WriteLine("Recv:" + csData);
-            game.MessageProc(csData);
+            Form1.OutDelegate outdelegate = new Form1.OutDelegate(GF.MessageProc);
+            GF.BeginInvoke(outdelegate, csData);
         }
 
         static void ClientMessageInputHandler(string message)
@@ -59,6 +69,11 @@ namespace GameClient
             pjd["OPCODE"] = (Int32)GameOpcode.CreateSprite;
             pjd["UUID"] = game.SelfUUID;
             Program.SendDataSingle(pjd.ToJson(), game.SelfUUID);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

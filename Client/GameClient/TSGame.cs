@@ -33,27 +33,35 @@ namespace GameClient
 
         public bool KeyDown(Keys keyData)
         {
+            var spr = GetSprite(SelfUUID);
+            var sprMove = spr.Location;
             if (keyData == (Keys.W))
             {
+                sprMove.Y--;
             }
 
             if (keyData == (Keys.S))
             {
+                sprMove.Y++;
             }
 
             if (keyData == (Keys.A))
             {
+                sprMove.X--;
             }
 
             if (keyData == (Keys.D))
             {
+                sprMove.X++;
             }
+
+            spr.Location = sprMove;
 
             JsonData jd = new JsonData();
             jd["OPCODE"] = (Int32)GameOpcode.MoveSprite;
             jd["UUID"] = SelfUUID;
-            jd["X"] = GetSprite(SelfUUID).Location.X;
-            jd["Y"] = GetSprite(SelfUUID).Location.Y;
+            jd["X"] = spr.Location.X;
+            jd["Y"] = spr.Location.Y;
             Program.SendDataBroad(jd.ToJson());
             return true;
         }
@@ -73,6 +81,7 @@ namespace GameClient
                     {
                         var uuid = (Int64)jd["UUID"];
                         SelfUUID = uuid;
+                        CreateSprite(uuid);
                     }
                     break;
                 case (Int32)GameOpcode.CreateSprite:
@@ -103,6 +112,7 @@ namespace GameClient
             sp.UseVisualStyleBackColor = true;
             SpriteList[uuid] = sp;
 
+            fm.Controls.Add(sp);
             return sp;
         }
 
