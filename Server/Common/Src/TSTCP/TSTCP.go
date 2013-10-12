@@ -8,7 +8,7 @@ import (
 )
 
 type ConnectNew func (conn net.Conn) uint64
-type ReceiveBuffer func (conn net.Conn, sBuffer string, UUID uint64)
+type ReceiveBuffer func (conn net.Conn, sBuffer []byte, UUID uint64)
 type ServerInit func ()
 type ClientInit func (conn net.Conn)
 type ConnectClose func (conn net.Conn, UUID uint64)
@@ -108,19 +108,7 @@ func tcpHandler(conn net.Conn, funRB ReceiveBuffer, funCC ConnectClose, UUID uin
 			data := make([]byte, contentLen)
 			_, err = buf.Read(data)
 
-			ss := string(data)
-//			if UUID > 0 {
-				funRB(conn, ss, UUID)
-//			} else {
-//				ssList := strings.Split(ss, ",");
-//				if ssList[0] == "_RegistUUID" {
-//					value, _ := strconv.Atoi(ssList[1]);
-//					UUID = uint64(value)
-//					fmt.Println("_RegistUUID : ", UUID)
-//				} else {
-//					funRB(conn, ss, UUID)
-//				}
-//			}
+			funRB(conn, data, UUID)
 			contentLen = 0
 		}
 	}

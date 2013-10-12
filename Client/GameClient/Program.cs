@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Text;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace GameClient
 {
@@ -17,30 +19,55 @@ namespace GameClient
         [STAThread]
         static void Main()
         {
-            client = new SocketClient();
-            client.BinaryInput = new ClientBinaryInputHandler(ClientBinaryInputHandler); //设置数据包处理回调方法
-            client.MessageInput = new ClientMessageInputHandler(ClientMessageInputHandler);//断开处理
-            if (client.Connect("127.0.0.1", 9901)) //连接到服务器
-            {
-                client.StartRead(); //开始监听读取
-
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1());
-            }
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
         }
 
-        static void ClientBinaryInputHandler(byte[] data)
+        public static void SendData(MessagePacket mp)
         {
-            var csData = Encoding.UTF8.GetString(data, 0, data.Length);
-            Console.WriteLine("Recv:" + csData);
-            
+            MemoryStream stream = new MemoryStream();
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(MessagePacket));
+            ser.WriteObject(stream, mp);
+            var packet = Encoding.UTF8.GetString(stream.GetBuffer(), 0, (int)stream.Length);
+            client.SendData(packet);
         }
 
-        static void ClientMessageInputHandler(string message)
+        public static void SendDataBroad(string data)
         {
-            Console.WriteLine("与服务器端断开连接");
-            client.Close();
+            MessagePacket mp = new MessagePacket();
+            mp.D = data;
+            mp.T = (int)SendMode.SendBroad;
+            MemoryStream stream = new MemoryStream();
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(MessagePacket));
+            ser.WriteObject(stream, mp);
+            var packet = Encoding.UTF8.GetString(stream.GetBuffer(), 0, (int)stream.Length);
+            client.SendData(packet);
+        }
+
+        public static void SendDataBroadNotSelf(string data)
+        {
+            MessagePacket mp = new MessagePacket();
+            mp.D = data;
+            mp.T = (int)SendMode.SendBroadNotSelf;
+            MemoryStream stream = new MemoryStream();
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(MessagePacket));
+            ser.WriteObject(stream, mp);
+            var packet = Encoding.UTF8.GetString(stream.GetBuffer(), 0, (int)stream.Length);
+            client.SendData(packet);
+        }
+
+        public static void SendDataSingle(string data, Int64 uuid)
+        {
+            MessagePacket mp = new MessagePacket();
+            mp.D = data;
+            mp.T = (int)SendMode.SendSingle;
+            mp.S = uuid;
+            MemoryStream stream = new MemoryStream();
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(MessagePacket));
+            ser.WriteObject(stream, mp);
+            var packet = Encoding.UTF8.GetString(stream.GetBuffer(), 0, (int)stream.Length);
+            client.SendData(packet);
         }
     }
 }

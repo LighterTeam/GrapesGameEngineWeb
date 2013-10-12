@@ -21,6 +21,10 @@ func Marshal(v interface{}) ([]byte, error) {
 	return json.Marshal(v)
 }
 
+func Unmarshal(data []byte, v interface{}) error {
+	return json.Unmarshal(data, v)
+}
+
 // NewJson returns a pointer to a new `Json` object
 // Json's data is map[string]interface{}
 func NewEmptyJson() *Json {
