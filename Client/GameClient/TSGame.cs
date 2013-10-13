@@ -64,7 +64,7 @@ namespace GameClient
             jd["UUID"] = SelfUUID;
             jd["X"] = spr.Location.X;
             jd["Y"] = spr.Location.Y;
-            Program.SendDataBroad(jd.ToJson());
+            Program.SendDataBroadNotSelf(jd.ToJson());
             return true;
         }
 
@@ -76,13 +76,14 @@ namespace GameClient
                 Console.WriteLine("JsonData Error! msg:" + msg);
                 return;
             }
+            var uuidxx = (Int32)jd["UUID"];
             var opCode = (Int32)jd["OPCODE"];
             switch (opCode)
             {
                 case (Int32)GameOpcode.RegistServer:
                     {
-                        var uuid = (Int64)jd["UUID"];
-                        var Ruuid = (Int64)jd["ROOTUUID"];
+                        var uuid = (Int32)jd["UUID"];
+                        var Ruuid = (Int32)jd["ROOTUUID"];
 
                         SelfUUID = uuid;
                         RootPlayerUUID = Ruuid;
@@ -94,14 +95,14 @@ namespace GameClient
                     break;
                 case (Int32)GameOpcode.CreateSprite:
                     {
-                        var uuid = (Int64)jd["UUID"];
+                        var uuid = (Int32)jd["UUID"];
                         Point p = new Point(50, 50);
                         CreateSprite(uuid, p);
                     }
                     break;
                 case (Int32)GameOpcode.MoveSprite:
                     {
-                        var uuid = (Int64)jd["UUID"];
+                        var uuid = (Int32)jd["UUID"];
                         var x = (Int32)jd["X"];
                         var y = (Int32)jd["Y"];
                         GetSprite(uuid).SetLoc(x, y);
@@ -109,13 +110,13 @@ namespace GameClient
                     break;
                 case (Int32)GameOpcode.RemoveSprite:
                     {
-                        var uuid = (Int64)jd["UUID"];
+                        var uuid = (Int32)jd["UUID"];
                         RemoveSprite(uuid);
                     }
                     break;
                 case (Int32)GameOpcode.RegistRootPlayer:
                     {
-                        var uuid = (Int64)jd["ROOTUUID"];
+                        var uuid = (Int32)jd["ROOTUUID"];
                         RootPlayerUUID = uuid;
                         fm.Text = "Self:" + SelfUUID + " RootID:" + RootPlayerUUID;
                     }

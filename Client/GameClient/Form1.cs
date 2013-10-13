@@ -67,7 +67,7 @@ namespace GameClient
             Program.client = new SocketClient();
             Program.client.BinaryInput = new ClientBinaryInputHandler(ClientBinaryInputHandler); //设置数据包处理回调方法
             Program.client.MessageInput = new ClientMessageInputHandler(ClientMessageInputHandler);//断开处理
-            if (Program.client.Connect("192.168.1.6", 9901)) //连接到服务器
+            if (Program.client.Connect("10.211.55.4", 9901)) //连接到服务器
             {
                 Program.client.StartRead(); //开始监听读取
             }
