@@ -1,5 +1,5 @@
 @echo off
-title BuildDB
+title BuildGame
 
 del bin\GameServer.exe
 
